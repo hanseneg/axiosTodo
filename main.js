@@ -26,16 +26,24 @@ axios.get("https://api.vschool.io/ethan17/todo")
             //delete
             deleteButton.addEventListener("click", (e) => {
                 e.preventDefault()
-                axios.delete("https://api.vschool.io/ethan17/todo/${response.data[i]._id}")
+                axios.delete(`https://api.vschool.io/ethan17/todo/${response.data[i]._id}`)
                     .then(response => {alert('Successfully Deleted')})
                     .catch(error => {alert('Delete Unsuccessful')})
             })
-        }
-     
+            //put
+            check.addEventListener('click', () => {
+            const updates = {
+                completed: true
+            }
+            axios.put(`https://api.vschool.io/ethan17/todo/${response.data[i]._id}`, updates)
+                .then(response => console.log(response.data))
+                .catch(error => console.log(error))
+            })
 
-        if(response.data[i].completed === true){
-            title.style.textDecoration = "line-through"
-        }
+            if(response.data[i].completed === true){
+                label.style.textDecoration = "line-through"
+                }
+            }
     })
     .catch(error => console.log(error))
 
@@ -44,14 +52,7 @@ axios.get("https://api.vschool.io/ethan17/todo")
 //5f7cb303a269067180b0f22b
 
 
-//put
-const updates = {
-    completed: true
-}
 
-axios.put("https://api.vschool.io/ethan17/todo/5f7cb303a269067180b0f22b", updates)
-    .then(response => console.log(response.data))
-    .catch(error => console.log(error))
 
 
 //post
