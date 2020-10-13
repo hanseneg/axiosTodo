@@ -49,15 +49,16 @@ axios.put("https://api.vschool.io/ethan17/todo/5f7cb303a269067180b0f22b", update
 //     .catch(error => console.log(error))
 
 //post
-const todoForm = document.todoform
+const todoForm = document.getElementById("form")
 
-todoForm.addEventListener("submit", function(event){
-    event.preventDefault()
+todoForm.addEventListener("submit", (e) => {
+    e.preventDefault()
     
     const newTodo = {
-        title: todoForm.title.value,
-        description: todoForm.description.value,
-        imgUrl: todoForm.imgUrl.value
+        title: title.value,
+        description: description.value,
+        imgUrl: image.value,
+        price: price.value
     }
     
     axios.post("https://api.vschool.io/ethan17/todo", newTodo)
