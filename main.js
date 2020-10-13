@@ -7,10 +7,6 @@ const deleteForm = document.getElementById('deleteForm')
 const deleteButton = document.getElementById('deleteButton')
 const list = document.getElementById('list')
 
-const updates = {
-    completed: true
-}
-
 axios.get("https://api.vschool.io/ethan17/todo")
     .then(response => {
         for(let i = 0; i < response.data.length; i++){
@@ -26,7 +22,7 @@ axios.get("https://api.vschool.io/ethan17/todo")
             list.appendChild(div)
         }
         if(response.data[i].completed === true){
-            label.strike()
+            
         }
     })
     .catch(error => console.log(error))
@@ -35,18 +31,14 @@ axios.get("https://api.vschool.io/ethan17/todo")
 
 
 //put
+const updates = {
+    completed: true
+}
+
 axios.put("https://api.vschool.io/ethan17/todo/5f7cb303a269067180b0f22b", updates)
     .then(response => console.log(response.data))
     .catch(error => console.log(error))
 
-// const updates = {
-//     title: "My Second Todo",
-//     description: "This is my second todo"
-// }
-
-// axios.put("https://api.vschool.io/scrimbalessons/todo/5d8bd531ee91575e6d49e06f", updates)
-//     .then(response => console.log(response.data))
-//     .catch(error => console.log(error))
 
 //post
 const todoForm = document.getElementById("form")
@@ -57,9 +49,14 @@ todoForm.addEventListener("submit", (e) => {
     const newTodo = {
         title: title.value,
         description: description.value,
-        imgUrl: image.value,
+        image: image.value,
         price: price.value
     }
+
+        todoForm.title.value = ""
+        todoForm.description.value = ""
+        todoForm.image.value = ""
+        todoForm.price.value = ""
     
     axios.post("https://api.vschool.io/ethan17/todo", newTodo)
         .then(response => console.log(response.data))
@@ -68,10 +65,10 @@ todoForm.addEventListener("submit", (e) => {
 })
 
 //delete
-const button = document.getElementById('delete-button')
 
-button.addEventListener("click", function(){
-    axios.delete("https://api.vschool.io/scrimbalessons/todo/5d8bd511ee91575e6d49e06e")
+
+deleteButton.addEventListener("click", () => {
+    axios.delete("")
         .then(response => console.log(response.data))
         .catch(error => console.log(error))
 })
@@ -133,4 +130,3 @@ button.addEventListener("click", function(){
 //         .then(res => getData())
 //         .catch(err => console.log(err))
 // })
-
