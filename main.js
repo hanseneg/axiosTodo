@@ -5,7 +5,6 @@ const price = document.getElementById('price')
 const submit = document.getElementById('submit')
 const list = document.getElementById('list')
 
-
 axios.get("https://api.vschool.io/ethan17/todo")
     .then(response => {
         for(let i = 0; i < response.data.length; i++){
@@ -24,8 +23,7 @@ axios.get("https://api.vschool.io/ethan17/todo")
             list.appendChild(div)
 
             //delete
-            deleteButton.addEventListener("click", (e) => {
-                e.preventDefault()
+            deleteButton.addEventListener("click", () => {
                 axios.delete(`https://api.vschool.io/ethan17/todo/${response.data[i]._id}`)
                     .then(response => {alert('Successfully Deleted')})
                     .catch(error => {alert('Delete Unsuccessful')})
@@ -42,18 +40,15 @@ axios.get("https://api.vschool.io/ethan17/todo")
 
             if(response.data[i].completed === true){
                 label.style.textDecoration = "line-through"
-                }
             }
+            if(response.data[i].image){
+                const img = document.createElement('img')
+                img.src = response.data[i].image
+                div.appendChild(img)
+            }
+        }
     })
     .catch(error => console.log(error))
-
-
-
-//5f7cb303a269067180b0f22b
-
-
-
-
 
 //post
 const todoForm = document.getElementById("form")
@@ -79,11 +74,7 @@ todoForm.addEventListener("submit", (e) => {
     
 })
 
-
-
-
-
-
+//5f7cb303a269067180b0f22b
 
 //auto update
 
