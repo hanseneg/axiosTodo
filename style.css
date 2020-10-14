@@ -15,7 +15,7 @@ h1 {
     text-align: center;
     text-transform: uppercase;
     border-radius: 5px;
-    
+    padding: 5px;
 }
 #deleteButton {
     color: rgb(146, 146, 146);
@@ -25,7 +25,8 @@ h1 {
     font-family: 'Open Sans', sans-serif;
     text-align: center;
     text-transform: uppercase;
-    border-radius: 5px;
+    border-radius: 5px;    
+    padding: 5px;
 }
 #submit:hover {
     transform: scale(1.2);
