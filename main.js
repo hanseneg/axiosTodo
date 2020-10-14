@@ -5,8 +5,10 @@ const price = document.getElementById('price')
 const submit = document.getElementById('submit')
 const list = document.getElementById('list')
 
-axios.get("https://api.vschool.io/ethan17/todo")
+const getData = () => {
+    axios.get("https://api.vschool.io/ethan17/todo")
     .then(response => {
+        list.innerHTML = ""
         for(let i = 0; i < response.data.length; i++){
             const check = document.createElement('input')
             const div = document.createElement('div')
@@ -14,6 +16,7 @@ axios.get("https://api.vschool.io/ethan17/todo")
             const deleteButton = document.createElement('button')
             deleteButton.innerText = 'delete'
             check.type = 'checkbox'
+            check.checked = response.data[i].completed
             //check.id = 'text'
             label.for = 'text'
             label.innerText = response.data[i].title
@@ -24,14 +27,26 @@ axios.get("https://api.vschool.io/ethan17/todo")
 
             //delete
             deleteButton.addEventListener("click", () => {
-                axios.delete(`https://api.vschool.io/ethan17/todo/${response.data[i]._id}`)
-                    .then(response => {alert('Successfully Deleted')})
-                    .catch(error => {alert('Delete Unsuccessful')})
+                if(confirm("Are you sure you want to delete?")){
+                    axios.delete(`https://api.vschool.io/ethan17/todo/${response.data[i]._id}`)
+                        .then(() => {
+                            alert('Successfully Deleted')
+                            getData()
+                        })
+                        .catch(() => {alert('Delete Unsuccessful')})
+                }
             })
+        
             //put
-            check.addEventListener('click', () => {
+            check.addEventListener('click', (e) => {
+                console.log(e)
             const updates = {
-                completed: true
+                completed: e.target.checked
+            }
+            if(e.target.checked){
+                label.style.textDecoration = "line-through"
+            }else{
+                label.style.textDecoration = "none"
             }
             axios.put(`https://api.vschool.io/ethan17/todo/${response.data[i]._id}`, updates)
                 .then(response => console.log(response.data))
@@ -41,14 +56,18 @@ axios.get("https://api.vschool.io/ethan17/todo")
             if(response.data[i].completed === true){
                 label.style.textDecoration = "line-through"
             }
-            if(response.data[i].image){
+            if(response.data[i].imgUrl){
                 const img = document.createElement('img')
-                img.src = response.data[i].image
+                img.src = response.data[i].imgUrl
+                img.height = "50"
+                img.width = "50"
                 div.appendChild(img)
             }
         }
     })
     .catch(error => console.log(error))
+}
+getData()
 
 //post
 const todoForm = document.getElementById("form")
@@ -69,60 +88,6 @@ todoForm.addEventListener("submit", (e) => {
         todoForm.price.value = ""
     
     axios.post("https://api.vschool.io/ethan17/todo", newTodo)
-        .then(response => console.log(response.data))
+        .then(() => getData())
         .catch(error => console.log(error))
-    
 })
-
-//5f7cb303a269067180b0f22b
-
-//auto update
-
-
-// GET's THE TODO's FROM THE DATABASE
-// function getData(){
-//     axios.get("https://api.vschool.io/johnsmith2/todo")
-//         .then(res => listData(res.data))
-//         .catch(err => console.log(err))
-// }
-
-
-
-// // LISTS THE TODO TITLES TO THE DOM
-// function listData(data){
-//     // document.getElementById('todo-list').innerHTML = ""
-//     clearList()
-    
-//     for(let i = 0; i < data.length; i++){
-//         const h1 = document.createElement('h1')
-//         h1.textContent = data[i].title
-//         document.getElementById('todo-list').appendChild(h1)
-//     }
-// }
-
-// function clearList(){
-//     const el = document.getElementById('todo-list')
-//     while(el.firstChild){
-//         el.removeChild(el.firstChild)
-//     }
-// }
-
-// getData()
-
-
-// // FORM FOR THE POST REQUEST
-// const todoForm = document["todo-form"]
-
-// todoForm.addEventListener("submit", function(e){
-//     e.preventDefault()
-    
-//     const newTodo = {
-//         title: todoForm.title.value
-//     }
-    
-//     todoForm.title.value = ""
-    
-//     axios.post("https://api.vschool.io/johnsmith2/todo", newTodo)
-//         .then(res => getData())
-//         .catch(err => console.log(err))
-// })
