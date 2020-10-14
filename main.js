@@ -14,7 +14,8 @@ const getData = () => {
             const div = document.createElement('div')
             const label = document.createElement('label')
             const deleteButton = document.createElement('button')
-            deleteButton.innerText = 'delete'
+            deleteButton.id = 'deleteButton'
+            deleteButton.innerText = 'Delete'
             check.type = 'checkbox'
             check.checked = response.data[i].completed
             //check.id = 'text'
@@ -81,7 +82,6 @@ todoForm.addEventListener("submit", (e) => {
         image: image.value,
         price: price.value
     }
-
         todoForm.title.value = ""
         todoForm.description.value = ""
         todoForm.image.value = ""

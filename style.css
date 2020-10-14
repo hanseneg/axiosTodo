@@ -1,0 +1,35 @@
+body {
+    text-align: center;
+    background-color: rgb(146, 146, 146);
+    color: rgb(68, 67, 67);
+}
+h1 {
+    text-transform: uppercase;
+}
+#submit {
+    color: rgb(146, 146, 146);
+    background-color: rgb(27, 104, 38);
+    border: 0.16em solid #FFFFFF;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    
+}
+#deleteButton {
+    color: rgb(146, 146, 146);
+    background-color: rgb(151, 6, 6);
+    border: 0.16em solid #FFFFFF;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+#submit:hover {
+    transform: scale(1.2);
+}
+#deleteButton:hover {
+    transform: scale(0.8);
+}
